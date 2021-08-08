@@ -8,6 +8,7 @@ public class SearchPage {
 	private Browser browser;
 	private By searchQuery = By.name("q");
 	private By searchbtn= By.name("btnK");
+	//jd
 
 
 	public SearchPage(Browser brwoser){
