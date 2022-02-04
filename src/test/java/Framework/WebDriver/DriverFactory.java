@@ -25,21 +25,19 @@ public class DriverFactory {
 		propertyReader reader= new propertyReader();
 		String browser = reader.getBrwoserType();
 		if(browser.equalsIgnoreCase("safari")){
-			driver = new SafariDriver();
+			driver = getSafariDriver();
 		}else if(browser.equalsIgnoreCase("chrome")){
-			WebDriverManager.chromedriver().arch32().setup();
-			driver = new ChromeDriver();
+			driver = getChromeDriver();
 		}else if(browser.equalsIgnoreCase("firefox")){
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
+			driver = getFirefoxDriver();
 		}else{
 			/*WebDriverManager.edgedriver().arch32().setup();
 			EdgeOptions edgeOptions = new EdgeOptions();
 			edgeOptions.addArguments("headless");
 				edgeOptions.addArguments("disable-gpu");
 			driver = new EdgeDriver(edgeOptions);*/
-			WebDriverManager.chromedriver().arch32().setup();
-			driver = new ChromeDriver();
+
+			driver = getChromeDriver();
 		}
 		Browser b=null;
 		try{
@@ -53,15 +51,18 @@ public class DriverFactory {
 
 
 
-	public WebDriver getFirefoxDriver(){
+	protected static WebDriver getFirefoxDriver(){
+		WebDriverManager.firefoxdriver().setup();
 		return new FirefoxDriver();
 	}
 	
-	public WebDriver getChromeDriver(){
+	protected static WebDriver getChromeDriver(){
+		WebDriverManager.chromedriver().arch32().setup();
 	return new ChromeDriver();
 	}
 	
-	public WebDriver getSafariDriver(){
+	protected static WebDriver getSafariDriver(){
+		WebDriverManager.safaridriver().arch32().setup();
 		return new SafariDriver();
 	}
 

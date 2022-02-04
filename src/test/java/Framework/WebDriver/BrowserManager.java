@@ -18,4 +18,9 @@ public class BrowserManager {
     public static void setBrowser(Browser browser){
         _browser.set(browser);
     }
+
+    public static void cleanup(){
+        _browser.get().getDriver().quit();
+        _browser.remove();
+    }
 }

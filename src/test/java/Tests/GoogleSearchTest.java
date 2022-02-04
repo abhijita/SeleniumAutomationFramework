@@ -21,7 +21,7 @@ public class GoogleSearchTest {
 	
 	@AfterMethod
 	public void tearDown(){
-
+		BrowserManager.cleanup();
 	}
 
 	public Browser browser(){
