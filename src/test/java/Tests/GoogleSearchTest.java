@@ -1,33 +1,59 @@
 package Tests;
 
+import Framework.WebDriver.BrowserManager;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import Framework.Web.Browser;
-import Framework.DriverFactory;
-import Pages.SearchPage;
+import Framework.WebDriver.DriverFactory;
+import Pages.SearchPage.SearchPage;
 
 public class GoogleSearchTest {
-	private Browser browser;
+
 	
 	@BeforeMethod
 	public void setUp() throws Exception {
-		DriverFactory df = new DriverFactory();
-		browser = df.getBrowserInstance();
+		BrowserManager.getBrowser();
 	}
 	
 	@AfterMethod
 	public void tearDown(){
-		//browser.closeInstance();
+
+	}
+
+	public Browser browser(){
+		return BrowserManager.getBrowser();
 	}
 	
-	@Test
-	public void SearchTest(){
-		
-		browser.openURL("http://google.com");
-		SearchPage s = new SearchPage(browser);
-		s.searchfor("moto 3 ");
+	@Test(description = "google test",enabled = false)
+	public void searchTest(){
+		 By searchQuery = By.name("q");
+		 By searchbtn= By.name("btnK");
+		browser().openURL("http://google.com");
+		//SearchPage s = new SearchPage(browser);
+	//	s.searchfor("moto 3 ");
+		browser().textBox(searchQuery).sendKeys("edge headless test");
+		browser().button(searchbtn).click();
+
+	}
+
+	@Test(description = "validating the search result")
+	public void validateSearch(){
+		browser().openURL("http://google.com");
+		SearchPage search = new SearchPage();
+		search.searchfor("Selenium WebDriver");
+		Assert.assertTrue(search.validate().verifySearchResult(),"Validate Search Result");
+	}
+
+	@Test(description = "validating the search result1")
+	public void validateSearchanother(){
+		browser().openURL("http://google.com");
+		SearchPage search = new SearchPage();
+		search.searchfor("Selenium bidi");
+		Assert.assertTrue(search.validate().verifySearchResult(),"Validate Search Result");
 	}
 
 }

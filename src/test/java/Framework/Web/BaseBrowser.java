@@ -1,6 +1,7 @@
 package Framework.Web;
 
 import Framework.FrameworkConstants;
+import Framework.WebDriver.BrowserManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -8,23 +9,35 @@ import java.util.logging.Logger;
 
 
 public abstract class BaseBrowser {
+    protected By locator;
 
-    protected WebDriver driver;
     protected FrameworkConstants constants=FrameworkConstants.getInstance();
 
-
-    protected   void click(By locator){
-        this.waitFor().waitForElementToVisible(locator);
-        driver.findElement(locator).click();
+    public WebDriver driver(){
+        return BrowserManager.getBrowser().getDriver();
     }
 
-    protected void set(By locator,String message){
+    public void setLocator(By elementLocator){
+        locator = elementLocator;
+    }
+
+    protected  void performClick(){
+        this.waitFor(locator).waitForElementToVisible();
+        driver().findElement(locator).click();
+    }
+
+    protected void performSet(By locator, String message){
         //driver.findElement(locator).clear();
-        waitFor().waitForElementToVisible(locator);
-        driver.findElement(locator).sendKeys(message);
+        waitFor(locator).waitForElementToVisible();
+        driver().findElement(locator).sendKeys(message);
+        System.out.println("setting value to text box. Value : "+message);
     }
 
-    protected Synchronizations waitFor(){
-        return new Synchronizations(driver);
+    protected Synchronizations waitFor(By locator){
+        return new Synchronizations(locator);
+    }
+
+    public boolean isDisplayed(){
+        return driver().findElement(locator).isDisplayed();
     }
 }
