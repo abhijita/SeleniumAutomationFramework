@@ -12,8 +12,8 @@ public class TextBox extends BaseBrowser{
         super.performSet(locator,value);
     }
 
-    public Synchronizations waitFor(){
-        return new Synchronizations(locator);
+    public void clear(){
+        driver().findElement(super.locator).clear();
     }
 
 }

@@ -12,6 +12,6 @@ public class SearchPageValidator {
     }
 
     public boolean verifySearchResult(){
-         return elements.result().isDisplayed();
+        return elements.result().isDisplayed();
     }
 }

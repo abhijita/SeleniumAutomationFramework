@@ -37,7 +37,7 @@ public class DriverFactory {
 				edgeOptions.addArguments("disable-gpu");
 			driver = new EdgeDriver(edgeOptions);*/
 
-			driver = getChromeDriver();
+			driver = getFirefoxDriver();
 		}
 		Browser b=null;
 		try{

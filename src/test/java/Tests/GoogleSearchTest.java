@@ -2,6 +2,8 @@ package Tests;
 
 import Framework.WebDriver.BrowserManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -56,4 +58,8 @@ public class GoogleSearchTest {
 		Assert.assertTrue(search.validate().verifySearchResult(),"Validate Search Result");
 	}
 
+	@Test(description = "check drag and drop")
+	public void testDragandDrop(){
+
+	}
 }

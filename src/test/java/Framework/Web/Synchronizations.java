@@ -13,8 +13,15 @@ public class Synchronizations extends BaseBrowser {
           super.setLocator(locator);
     }
 
+    private WebDriverWait webDriverWait(){
+        return  new WebDriverWait(driver(),constants.getTimeout());
+    }
+
     public void waitForElementToVisible(){
-        WebDriverWait wait = new WebDriverWait(driver(),constants.getTimeout());
-        wait.until(ExpectedConditions.visibilityOf(driver().findElement(locator)));
+        webDriverWait().until(ExpectedConditions.visibilityOf(driver().findElement(locator)));
+    }
+
+    public void waitForElementToBeInvisible(){
+        webDriverWait().until(ExpectedConditions.invisibilityOf(driver().findElement(locator)));
     }
 }
