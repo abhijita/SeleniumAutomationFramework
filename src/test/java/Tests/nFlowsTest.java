@@ -17,14 +17,17 @@ import java.io.FileReader;
 public class nFlowsTest {
 
     public static void main(String[] args) throws Exception {
+        String url ="";
+        String uname="";
+        String pwd="";
         WebDriverManager.firefoxdriver().arch32().setup();
         WebDriver driver = new FirefoxDriver();
-        driver.get("https://nt-uat.nflows.com/nFlows/login/login.jsp");
+        driver.get(url);
 
         Thread.sleep(5000);
 
-        driver.findElement(By.cssSelector("#uname")).sendKeys("AA662");
-        driver.findElement(By.cssSelector("#password")).sendKeys("Nt@123");
+        driver.findElement(By.cssSelector("#uname")).sendKeys(uname);
+        driver.findElement(By.cssSelector("#password")).sendKeys(pwd);
         driver.findElement(By.cssSelector(".btn.btn-login.loginSubmit")).click();
 
         Thread.sleep(10000);
